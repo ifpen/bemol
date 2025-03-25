@@ -1,0 +1,14 @@
+
+# definition of rotor properties
+
+# number of blades
+nBlades: 3
+
+# blade pitch, radians
+pitch: -0.040143
+
+# hub radius, m
+hubRadius: 0.210
+
+# tip radius, m
+tipRadius: 2.250
