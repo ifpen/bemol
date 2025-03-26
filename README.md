@@ -4,7 +4,7 @@ Blade Element Momentum (BEM) academic library.
 
 ![bemol logo](images/logo-bemol.svg)
 
-**bemol**: (B)lade Element Momentum (O)pen-source (L)ibrary.
+**bemol**: (B)lade (E)lement (M)omentum (O)pen-source (L)ibrary.
 
 From musical notation, bémol means a note a semitone lower. This package is
 a semitone lower to commercial or fully packed BEM frameworks, a playground
