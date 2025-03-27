@@ -14,7 +14,7 @@ INV_TWO_PI = float(2.0/np.pi)
 class HubTipLoss:
 
     class Dummy:
-        """Empty dynamic inflow model."""
+        """Empty hub/tip loss correction model."""
 
         def __init__(self) -> None:
             return
