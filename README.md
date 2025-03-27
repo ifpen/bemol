@@ -20,9 +20,9 @@ a complete or fast implementation.
 
 - Model is always rigid.
 - Blade and rotor forces and moments (thus power) are not calculated, only
-  sectional forces and induction factors are considered.
-- Complex geometries (pre-bend or pre-swept).
-- Non-uniform inflow.
+  sectional forces and induction factors are calculated.
+- Complex geometries (pre-bend or pre-swept) not considered.
+- Non-uniform inflow not taken into account.
 - Not exhaustively validated.
 
 ## Implemented models
