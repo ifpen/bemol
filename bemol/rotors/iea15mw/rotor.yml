@@ -23,4 +23,11 @@ omegaRated: 0.7853186740514181
 # IEA-15-240-RWT_tabular.xlsx, Rotor Performance sheet, line 32
 pitchRated: -0.06499140591234773
 
-precone: 
+# rotor cone angle, rad
+# 4 deg
+precone: 0.069813170079773
+
+# shaft tilt angle, rad
+# 6 deg
+tilt: 0.10471975511966
+
