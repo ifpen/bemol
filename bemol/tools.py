@@ -7,19 +7,19 @@ def calculateVelocity(wind:float,omega:float,rad:float,azi:float,yaw:float,tilt:
     Parameters
     ----------
     wind : float
-        wind speed in m/s
+        wind speed, m/s
     omega : float
-        rotation velocity
+        rotation velocity, rad/s
     rad : float
         radius
     azi : float
-        azimuthal angle in radians
+        azimuthal angle, radians
     yaw : float
-        yaw angle in radians
+        yaw angle, radians
     tilt : float
-        tilt angle in radians
+        tilt angle, radians
     precone: float
-        precone angle in radians
+        precone angle, radians
 
     """
     Ux = wind*(

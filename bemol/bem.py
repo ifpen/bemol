@@ -240,7 +240,7 @@ class BaseBEM:
         wind: float
             wind velocity, m/s
         omega: float
-            angular velocity, m/s
+            angular velocity, rad/s
         args
             extra arguments
         angles : list or array
