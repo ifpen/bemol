@@ -23,9 +23,17 @@ class HubTipLoss:
             return 1.0
     
     class Prandtl:
-        """Prandt hub/tip loss correction model."""
-
-        def __init__(self,) -> None:
+        """Prandt hub/tip loss correction model.
+        
+        Parameters
+        ----------
+        epsilon: float, optional
+            minimal value of F to avoid errors close to/at the bounds of the
+            blade. Default is 1e-12.
+        
+        """
+        def __init__(self,epsilon=1e-12) -> None:
+            self._epsilon = epsilon
             return
 
         def __call__(self,radius,nBlades,hubRadius,tipRadius,inflowAngle):
@@ -36,7 +44,7 @@ class HubTipLoss:
             fRoot = nBlades/2.0*((radius - hubRadius) / (hubRadius*np.abs(np.sin(inflowAngle))))
             fRoot = INV_TWO_PI*np.arccos(np.exp(-fRoot))
 
-            return fTip * fRoot
+            return max(fTip*fRoot,self._epsilon)
 
 
 class SkewAngle:
