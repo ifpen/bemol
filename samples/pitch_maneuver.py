@@ -10,6 +10,11 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+## uncoment following lines if ModuleNotFounError
+## add repo folder to PYTHONPATH, if running from the samples folder
+# import sys
+# sys.path.append(os.path.abspath(f'{__file__}/../..'))
+
 import bemol
 
 
@@ -86,10 +91,14 @@ for (t, pitch) in zip(times, pitchs):
     Fns_Coupled.append(Fn)
     Fts_Coupled.append(Ft)
 
-plt.plot(times,Fns_Uncoupled,label='Uncoupled BEM')
-plt.plot(times,Fns_Coupled,label='Coupled BEM')
+plt.plot(times,Fns_Uncoupled,label='uncoupled BEM')
+plt.plot(times,Fns_Coupled,label='coupled BEM')
+plt.xlabel('time, s')
+plt.ylabel('normal lineic force, N/m')
+plt.grid()
 plt.legend()
 plt.savefig(f'{results_folder}/graph_pitch_maneuver.png')
+plt.show() # comment if you dont want to show the figure
 
 
 data = pd.DataFrame({'time':times,'fn':Fns_Uncoupled,'ft': Fts_Uncoupled})
