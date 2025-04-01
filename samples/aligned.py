@@ -9,6 +9,11 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
+## uncoment this to if ModuleNotFounError
+## add repo folder to PYTHONPATH, if running from the samples folder
+# import sys
+# sys.path.append(os.path.abspath(f'{__file__}/../..'))
+
 import bemol
 
 results_folder = 'results/aligned'
@@ -56,19 +61,21 @@ refCastor = pd.read_csv(
     f'{lib_folder}/rotors/mexico/ref/CASTOR.dat',
     index_col=None,comment='#',sep=' ',
     )
-# different orientation for tangent
-for field in refCastor:
-    if 'Ft' in field: refCastor[field] *= -1
 
 for i, name in enumerate(['Fn','Ft']):
+
+    # change orientation for tangent
+    factor = -1 if name == 'Ft' else 1
+
     fig, ax = plt.subplots(1,1,constrained_layout=True)
     ax.plot(refCastor['r'],refCastor[f'{name}15'],label='CASTOR')
-    ax.plot(mexico.radius,forces[:,i],label='Uncoupled BEM')
-    ax.plot(mexico.radius,forces_coupled[:,i],'--',label='Coupled BEM')
+    ax.plot(mexico.radius,factor*forces[:,i],label='Uncoupled BEM')
+    ax.plot(mexico.radius,factor*forces_coupled[:,i],'--',label='Coupled BEM')
     ax.legend()
     ax.grid()
-    ax.set_xlabel('r')
+    ax.set_xlabel('radius, m')
     ax.set_ylabel(f'{name}, N/m')
+    plt.show() # comment if you dont want to show the figure
     fig.savefig(f'{results_folder}/graph_aligned_force_{name}.png')
 
 
