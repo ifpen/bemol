@@ -20,10 +20,20 @@ def test_airfoil():
 
 def test_rotor():
     """Test definition of the rotor class."""
+
+    # test definition of rotors
+    assert 'mexico' in bemol.rotor.__dict__
+    assert 'iea15mw' in bemol.rotor.__dict__
+
     rotor = bemol.rotor.mexico
     # check iterator
     for i, section in enumerate(rotor):
         assert rotor[i] is section
+
+    # test definition of iea15mw rotor
+    iea15 = bemol.rotor.iea15mw
+    assert iea15.pitchRated == -0.06499140591234773
+
 
 
 def test_secondary_module():
