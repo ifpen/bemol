@@ -93,5 +93,5 @@ Use `conda activate bemol` to use the env.
 
 ## Authors
 
-Frédéric Blondel, Wagner Gonçalves Pinto
-@ IFP Energies nouvelles
+Wagner Gonçalves Pinto, Frédéric Blondel, Caroline Le Guern
+@ [IFP Energies nouvelles](https://www.ifpenergiesnouvelles.fr/)
