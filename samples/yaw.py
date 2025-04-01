@@ -12,6 +12,11 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+## uncoment following lines if ModuleNotFounError
+## add repo folder to PYTHONPATH, if running from the samples folder
+# import sys
+# sys.path.append(os.path.abspath(f'{__file__}/../..'))
+
 import bemol
 
 
@@ -57,15 +62,16 @@ forces_coupled, _, _ = solver_coupled.cycle(
 )
 
 azimuth_deg = np.degrees(azimuths)
-for i, elt in enumerate(elements):
+colors = ('red','blue','green')
+for i, (elt, color) in enumerate(zip(elements,colors)):
     ## plot values
     plt.plot(
         azimuth_deg,forces_uncoupled[:,i,0],
-        label=f'{elt}-th element (r = {mexico[i].radius:.4})',
+        label=f'r = {mexico[elt].radius:.2} m (#{elt})',color=color,
         )
     plt.plot(
         azimuth_deg,forces_coupled[:,i,0],'--',
-        label='Coupled BEM',
+        label='coupled BEM',color=color,
         )
     
     ## export data
@@ -78,6 +84,11 @@ for i, elt in enumerate(elements):
         )
     data.to_csv(f'{results_folder}/results_yaw_coupled_i{elt}.csv')
 
-plt.legend()
+
+plt.xlabel('azimuth, deg')
+plt.ylabel('normal lineic force, N/m')
+plt.legend(loc='lower center',bbox_to_anchor=(0.5,1.0),ncol=3)
+plt.grid()
+plt.show() # comment if you dont want to show the figure
 plt.savefig(f'{results_folder}/graph_yaw_azimuthal.png')
 plt.close()
