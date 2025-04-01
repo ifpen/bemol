@@ -8,3 +8,17 @@ Scripts with sample uses of the lib:
   section at fixed azimuth
 
 The results subfolder is ignored by git.
+
+You need to include the python folder to use the sample scripts. This can be
+done before calling the scripts or inside it:
+
+```bash
+export PYTHONPATH=/path/to/repo:$PYTHONPATH
+```
+
+OR
+
+```python
+import sys
+sys.path.append('/path/to/repo')
+```
