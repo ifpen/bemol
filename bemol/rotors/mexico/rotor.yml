@@ -4,11 +4,18 @@
 # number of blades
 nBlades: 3
 
-# blade pitch, radians
-pitch: -0.040143
 
 # hub radius, m
 hubRadius: 0.210
 
 # tip radius, m
 tipRadius: 2.250
+
+# wind speed at rated, m/s
+windRated: 15.06
+
+# angular velocity at rated, rad/s
+omegaRated: 44.5163679
+
+# blade pitch at rated, radians
+pitchRated: -0.040143

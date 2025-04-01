@@ -19,8 +19,10 @@ import bemol
 results_folder = 'results/aligned'
 os.makedirs(results_folder,exist_ok=True)
 
-wind = 15.06
-omega = 44.5163679
+turbine = bemol.rotor.mexico
+wind = turbine.windRated
+omega = turbine.omegaRated
+pitch = turbine.pitchRated
 rho = 1.191
 
 corrections = (
@@ -31,24 +33,22 @@ corrections = (
     bemol.secondary.TurbulentWakeState.Buhl,
     )
 
-mexico = bemol.rotor.mexico
-
 # all angles are null, flow completly aligned
 skewAngle = 0.0
 yawAngle = 0.0
 azimuthAngle = 0.0
 
-solver_uncoupled = bemol.ning.NingUncoupled(mexico,rho,corrections)
+solver_uncoupled = bemol.ning.NingUncoupled(turbine,rho,corrections)
 forces, _ = solver_uncoupled.steady(
-    azimuthAngle,mexico.pitch,wind,omega
+    azimuthAngle,pitch,wind,omega
 )
 data = pd.DataFrame({'fn':forces[:,0],'ft': forces[:,1]})
 data.to_csv(f'{results_folder}/results_aligned_uncoupled.csv',index=False)
 
 
-solver_coupled = bemol.ning.NingCoupled(mexico,rho,corrections)
+solver_coupled = bemol.ning.NingCoupled(turbine,rho,corrections)
 forces_coupled, _ = solver_coupled.steady(
-    azimuthAngle,mexico.pitch,wind,omega,
+    azimuthAngle,pitch,wind,omega,
     angles=[yawAngle,0.0],
     skew=0.0,
 )
@@ -69,8 +69,8 @@ for i, name in enumerate(['Fn','Ft']):
 
     fig, ax = plt.subplots(1,1,constrained_layout=True)
     ax.plot(refCastor['r'],refCastor[f'{name}15'],label='CASTOR')
-    ax.plot(mexico.radius,factor*forces[:,i],label='Uncoupled BEM')
-    ax.plot(mexico.radius,factor*forces_coupled[:,i],'--',label='Coupled BEM')
+    ax.plot(turbine.radius,factor*forces[:,i],label='Uncoupled BEM')
+    ax.plot(turbine.radius,factor*forces_coupled[:,i],'--',label='Coupled BEM')
     ax.legend()
     ax.grid()
     ax.set_xlabel('radius, m')
