@@ -98,7 +98,7 @@ plt.ylabel('normal lineic force, N/m')
 plt.grid()
 plt.legend()
 plt.savefig(f'{results_folder}/graph_pitch_maneuver.png')
-plt.show() # comment if you dont want to show the figure
+# plt.show() # uncomment if you want to show the figure
 
 
 data = pd.DataFrame({'time':times,'fn':Fns_Uncoupled,'ft': Fts_Uncoupled})

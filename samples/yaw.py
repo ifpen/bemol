@@ -90,4 +90,4 @@ plt.ylabel('normal lineic force, N/m')
 plt.legend(loc='lower center',bbox_to_anchor=(0.5,1.0),ncol=3)
 plt.grid()
 plt.savefig(f'{results_folder}/graph_yaw_azimuthal.png')
-plt.show() # comment if you dont want to show the figure
+# plt.show() # uncomment if you want to show the figure

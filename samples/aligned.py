@@ -76,6 +76,6 @@ for i, name in enumerate(['Fn','Ft']):
     ax.set_xlabel('radius, m')
     ax.set_ylabel(f'{name}, N/m')
     fig.savefig(f'{results_folder}/graph_aligned_force_{name}.png')
-    plt.show() # comment if you dont want to show the figure
+    # plt.show() # uncomment if you want to show the figure
 
 
