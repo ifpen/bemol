@@ -16,10 +16,11 @@ windRated: 11.1682309213429
 # angular velocity at rated, rad/s
 # 7.49924093265937 RPM
 # IEA-15-240-RWT_tabular.xlsx, Rotor Performance sheet, line 32
-#omegaRated: 0.7853186740514181
-omegaRated: 7.49924093265937
+omegaRated: 0.7853186740514181
 
 # blade pitch angle at rated, rad
 # 3.72373326339911 deg, for wind = 11.17037214 m/s,
 # IEA-15-240-RWT_tabular.xlsx, Rotor Performance sheet, line 32
 pitchRated: -0.06499140591234773
+
+precone: 
