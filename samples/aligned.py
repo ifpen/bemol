@@ -57,10 +57,13 @@ data.to_csv(f'{results_folder}/results_aligned_coupled.csv',index=False)
 
 
 lib_folder = os.path.abspath(os.path.dirname(bemol.__file__))
-refCastor = pd.read_csv(
-    f'{lib_folder}/rotors/mexico/ref/CASTOR.dat',
-    index_col=None,comment='#',sep=' ',
-    )
+# get reference data for plot
+ref = {}
+for solver in ('AeroDeeP','CASTOR'):
+    ref[solver] = pd.read_csv(
+        f'{lib_folder}/rotors/mexico/ref/data_{solver}.csv',
+        index_col=None,comment='#',sep=',',
+        )
 
 for i, name in enumerate(['Fn','Ft']):
 
@@ -68,9 +71,14 @@ for i, name in enumerate(['Fn','Ft']):
     factor = -1 if name == 'Ft' else 1
 
     fig, ax = plt.subplots(1,1,constrained_layout=True)
-    ax.plot(refCastor['r'],refCastor[f'{name}15'],label='CASTOR')
-    ax.plot(turbine.radius,factor*forces[:,i],label='Uncoupled BEM')
-    ax.plot(turbine.radius,factor*forces_coupled[:,i],'--',label='Coupled BEM')
+
+    ax.plot(ref['AeroDeeP']['radius'],factor*ref['AeroDeeP'][name],
+            '-ob',linewidth=1.0,markersize=3,label='AeroDeeP (BEM)')
+    ax.plot(ref['CASTOR']['radius'],factor*ref['CASTOR'][name],
+            '-sk',linewidth=1.0,markersize=3,label='CASTOR (FVW)')
+
+    ax.plot(turbine.radius,factor*forces[:,i],'-b',label='uncoupled BEM')
+    ax.plot(turbine.radius,factor*forces_coupled[:,i],'--r',label='coupled BEM')
     ax.legend()
     ax.grid()
     ax.set_xlabel('radius, m')

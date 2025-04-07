@@ -43,23 +43,38 @@ forces, _ = solver.steady(
     angles=[0.0,tilt],precone=precone,
     skew=0.0,
 )
-data = pd.DataFrame({'fn':forces[:,0],'ft':forces[:,1]})
+data = pd.DataFrame({'Fn':forces[:,0],'Ft':forces[:,1]})
 data.to_csv(f'{results_folder}/results_aligned_coupled.csv',index=False)
 
+lib_folder = os.path.abspath(os.path.dirname(bemol.__file__))
+# get reference data for plot
+ref = {}
+for solver in ('AeroDeeP','CASTOR'):
+    ref[solver] = pd.read_csv(
+        f'{lib_folder}/rotors/iea15mw/ref/data_{solver}.csv',
+        index_col=None,comment='#',sep=',',
+        )
+    
 
 fig, axs = plt.subplots(1,2,constrained_layout=True)
 
-for name, ax in zip(['fn','ft'],axs):
+for name, ax in zip(['Fn','Ft'],axs):
+    
     # change orientation for tangent
-    factor = -1 if name == 'ft' else 1
-    # ax.plot(refCastor['r'],refCastor[f'{name}15'],label='CASTOR')
+    factor = -1 if name == 'Ft' else 1
+
+    ax.plot(ref['AeroDeeP']['radius'],factor*ref['AeroDeeP'][name],
+            '-ob',linewidth=1.0,markersize=3,label='AeroDeeP (BEM)')
+    ax.plot(ref['CASTOR']['radius'],factor*ref['CASTOR'][name],
+            '-sk',linewidth=1.0,markersize=3,label='CASTOR (FVW)')
+    
     ax.plot(turbine.radius,factor*data[name],'-',label='bemol (coupled BEM)')
     ax.grid()
     ax.set_xlabel('radius, m')
     ax.set_ylabel(f'{name}, N/m')
 
-ax.legend()
+ax.legend() # legend only on the right plot
 fig.savefig(f'{results_folder}/graph_iea15mw_forces.png')
-plt.show() # uncomment if you want to show the figure
+#plt.show() # uncomment if you want to show the figure
 
 
