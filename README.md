@@ -32,12 +32,11 @@ the flow density and a list of the secondary corrections as inputs.
 
 Rotors are defined by the blade and rotor characteristics (radial evolution of
 sections, chords and twist, airfoil polars, number of blades, etc..).
-A sample rotor (mexico) is already defined. More details on how to implement
+The Mexico and IEA15MW turbines are already defined. More details on how to implement
 your own models are available in [bemol/rotors](bemol/rotors/README.md).
 
-
 The solution can be called for a given azimuth and flow condition (inflow
-velocity and rotor rotation velocity), for a complet cycle, etc. A basic
+velocity and rotor rotation velocity), for a complete cycle, etc. A basic
 script would be:
 
 ```python
