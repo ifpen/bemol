@@ -234,7 +234,9 @@ class NingUncoupled(bem.BaseBEM):
         wakeSkewAngle = self.corrections.skewAngle(
             self._axial_induction,yaw)
         self._axial_induction = self.corrections.yawModel(
-            self._axial_induction,wakeSkewAngle,azimuth,radius,self.rotor.tipRadius)
+            self._axial_induction,wakeSkewAngle,azimuth,radius,
+            self.rotor.hubRadius,self.rotor.tipRadius
+            )
         self._axial_induction = self.corrections.dynamicInflow(
             self._axial_induction,Ux,radius,tStep)
 
