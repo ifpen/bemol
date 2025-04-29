@@ -49,14 +49,14 @@ corrections = (
 ## solution for several revolutions, uncoupled Ning
 solver_uncoupled = bemol.ning.NingUncoupled(mexico,rho,corrections)
 forces_uncoupled, _, azimuths = solver_uncoupled.cycle(
-    mexico.pitch,wind,omega,angles=[yawAngle,tiltAngle],tStep=tStep,
+    mexico.pitchRated,wind,omega,angles=[yawAngle,tiltAngle],tStep=tStep,
     n_phi=180,N=number_revolutions,elements=elements,
 )
 
 ## solution for several revolutions, coupled Ning
 solver_coupled = bemol.ning.NingCoupled(mexico,rho,corrections)
 forces_coupled, _, _ = solver_coupled.cycle(
-    mexico.pitch,wind,omega,angles=[yawAngle,tiltAngle],tStep=tStep,
+    mexico.pitchRated,wind,omega,angles=[yawAngle,tiltAngle],tStep=tStep,
     uInfty=wind,skew=skewAngle,
     n_phi=180,N=number_revolutions,elements=elements,
 )
