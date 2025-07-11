@@ -10,13 +10,10 @@ At the time being the contributing procedure is really straigthforward.
 ## Steps
 
 0. Make sure you have all the dependencies available in your environment, with
-   the same (or similar) version indicated in [environnment.yaml](environnment.yaml).
-
+   the same (or similar) version indicated in [environnment.yaml](./environment.yaml).
 1. Create an issue indicating the bug you are fixing or the new feature you are
    implementing.
-
 2. Do your magic.
-
 3. Make the pull request for the `dev` branch, with an explanation of what you
    did and ask for a review.
 
