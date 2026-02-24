@@ -32,7 +32,7 @@ def test_rotor():
 
     # test definition of iea15mw rotor
     iea15 = bemol.rotor.iea15mw
-    assert iea15.pitchRated == -0.06499140591234773
+    assert iea15.pitchRated == 0.06499140591234773
 
 
 
