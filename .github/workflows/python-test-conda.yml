@@ -3,7 +3,7 @@ name: Python Package using Conda
 on: [push]
 
 jobs:
-  build-linux:
+  test-linux:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 5
@@ -24,16 +24,16 @@ jobs:
     - name: Install dependencies
       run: |
         conda env update --file environment.yaml
+        conda install flake8
     
     - name: Lint with flake8
       run: |
-        conda install flake8
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     
-
+    # TODO: conside the latest release, not a hardcoded one!
     - name: Get reference results
       run: |
         curl -L -o pytest-results.zip "https://github.com/ifpen/bemol/releases/download/v0.0.1/pytest-results.zip"
@@ -44,27 +44,4 @@ jobs:
       run: |
         source activate bemol
         pytest tests/ -vvs --reference tests/ref/
-        # store the latest run results as release artifact
-        # zip -r pytest-results.zip tests/results/
     
-    # artificially creating release
-    # - name: Create Release
-    #   id: create_release
-    #   uses: actions/create-release@v1
-    #   with:
-    #     tag_name: "v0.0.1"
-    #     release_name: "v0.0.1"
-    #     body: "This is a fake release to store reference data."
-    #     draft: false
-    #     prerelease: false
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    # - name: Upload to Release
-    #   uses: actions/upload-release-asset@v1
-    #   with:
-    #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-    #     asset_path: pytest-results.zip
-    #     asset_name: pytest-results.zip
-    #     asset_content_type: application/zip
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
