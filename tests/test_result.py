@@ -32,8 +32,7 @@ def change_test_dir(request,monkeypatch):
 @pytest.fixture(scope='module',autouse=True,)
 def reference_folder(request):
     # define the reference folder based on current folder
-    test_path = request.path.parent
-    reference_path = test_path / 'ref' / 'results_ref_2025-03-25'
+    reference_path = request.config.reference
     return Path( reference_path ).resolve()
 
 
@@ -114,8 +113,10 @@ def test_compare(folder,run,request,reference_folder):
 
         # only comparing if reference folder available
         if reference_folder.exists():
-            ref_filename = reference_folder / filename
+            ref_filename = reference_folder / name_run / filename
             ref_data = pd.read_csv(ref_filename)
             pd.testing.assert_frame_equal(ref_data,new_data)
         else:
+            # for the moment just doing nothing if reference folder not
+            # available! Make it at least a warning in the future.
             assert(True)
