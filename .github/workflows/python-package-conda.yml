@@ -31,4 +31,4 @@ jobs:
     - name: Test with pytest
       run: |
         source activate bemol
-        pytest tests/
+        pytest tests/ --vvs
